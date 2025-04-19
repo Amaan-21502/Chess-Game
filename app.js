@@ -6,12 +6,12 @@ const path = require('path'); //import path module to resolve paths
 
 const app = express();
 const server = http.createServer(app);
-const io = socket(server /*,{
+const io = socket(server ,{
   cors: {
     origin: '*',
     methods: ['GET', 'POST'],
   },
-}*/);
+});
 
 const chess = new Chess(); //contains the chess game logic
 
@@ -79,6 +79,8 @@ io.on('connection', (uniqueSocket) => {
     });
 }); //end of the connection event
 
-server.listen(3000, () => {
-    console.log('Server is running on port 3000'); //log the server is running
+const port = process.env.PORT || 3000;
+
+server.listen(port, () => {
+    console.log(`Server running on port ${port}`);
 });
